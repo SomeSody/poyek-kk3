@@ -10,3 +10,7 @@ Route::get('/ketua', function () {
     return view('ketua');
 });
 
+Route::get('/anggota', function () {
+    return view('wanggota');
+});
+
