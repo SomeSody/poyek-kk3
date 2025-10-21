@@ -59,6 +59,6 @@ class DashboardController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        /////////////
     }
 }
