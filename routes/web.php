@@ -16,3 +16,5 @@ Route::get('/anggota', function () {
 });
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::resource('products', \App\Http\Controllers\ProductController::class);
