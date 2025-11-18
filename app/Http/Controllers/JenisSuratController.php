@@ -13,7 +13,7 @@ class JenissuratController extends Controller
     public function index()
     {
         $data['dataJenisSurat'] = JenisSurat::all();
-        return view('admin.jenis_surat.index', $data);
+        return view('jenis_surat.index', $data);
     }
 
 
@@ -22,7 +22,7 @@ class JenissuratController extends Controller
      */
     public function create()
     {
-        return view('admin.jenis_surat.create');
+        return view('jenis_surat.create');
     }
 
     /**
@@ -31,13 +31,38 @@ class JenissuratController extends Controller
     public function store(Request $request)
     {
 
-        $data['kode'] = $request->kode;
-        $data['nama_jenis'] = $request->nama_jenis;
-        $data['syarat_json'] = $request->syarat_json;
+        $validated = $request->validate([
+            'kode' => 'required|numeric|unique:jenis_surat,kode',
+            'nama_jenis' => 'required|string|max:255',
+            'syarat_json' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    $decoded = json_decode($value, true);
+                    
+                    if (json_last_error() !== JSON_ERROR_NONE) {
+                        $fail('Format JSON tidak valid. Contoh yang benar: ["KTP", "KK", "Foto"]');
+                    }
+                    
+                    if (!is_array($decoded)) {
+                        $fail('Syarat JSON harus berupa array. Contoh: ["KTP", "KK"]');
+                    }
+                }
+            ],
+        ], [
+            'kode.required' => 'Kode surat wajib diisi',
+            'kode.numeric' => 'Kode surat harus berupa angka',
+            'kode.unique' => 'Kode surat sudah digunakan',
+            'nama_jenis.required' => 'Nama jenis surat wajib diisi',
+            'nama_jenis.max' => 'Nama jenis surat maksimal 255 karakter',
+            'syarat_json.required' => 'Syarat JSON wajib diisi',
+            'syarat_json.json' => 'Format JSON tidak valid. Contoh: ["KTP","KK","Foto"]',
+        ]);
 
-        JenisSurat::create($data);
+        JenisSurat::create($validated);
 
-        return redirect()->route('jenis_surat.index')->with('success', 'Data Jenis Surat berhasil ditambahkan!');
+        return redirect()->route('jenis_surat.index')
+        ->with('success', 'Data Jenis Surat berhasil ditambahkan!');
     }
 
     /**
@@ -45,7 +70,8 @@ class JenissuratController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['dataJenisSurat'] = JenisSurat::findOrFail($id);
+        return view('jenis_surat.show', $data);
     }
 
     /**
@@ -54,7 +80,7 @@ class JenissuratController extends Controller
     public function edit(string $id)
     {
         $data['dataJenisSurat'] = JenisSurat::findOrFail($id);
-        return view('admin.jenis_surat.edit', $data);
+        return view('jenis_surat.edit', $data);
     }
 
     /**
@@ -62,16 +88,40 @@ class JenissuratController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $jenis_id = $id;
-        $jenisSurat = JenisSurat::findOrFail($jenis_id);
+        $jenisSurat = JenisSurat::findOrFail($id);
 
-        $jenisSurat->kode = $request->kode;
-        $jenisSurat->nama_jenis = $request->nama_jenis;
-        $jenisSurat->syarat_json = $request->syarat_json;
+        $validated = $request->validate([
+            'kode' => 'required|numeric|unique:jenis_surat,kode,' . $id . ',jenis_id',
+            'nama_jenis' => 'required|string|max:255',
+            'syarat_json' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    $decoded = json_decode($value, true);
+                    
+                    if (json_last_error() !== JSON_ERROR_NONE) {
+                        $fail('Format JSON tidak valid. Contoh yang benar: ["KTP", "KK", "Foto"]');
+                    }
+                    
+                    if (!is_array($decoded)) {
+                        $fail('Syarat JSON harus berupa array. Contoh: ["KTP", "KK"]');
+                    }
+                }
+            ],
+        ], [
+            'kode.required' => 'Kode surat wajib diisi',
+            'kode.numeric' => 'Kode surat harus berupa angka',
+            'kode.unique' => 'Kode surat sudah digunakan',
+            'nama_jenis.required' => 'Nama jenis surat wajib diisi',
+            'nama_jenis.max' => 'Nama jenis surat maksimal 255 karakter',
+            'syarat_json.required' => 'Syarat JSON wajib diisi',
+            'syarat_json.json' => 'Format JSON tidak valid',
+        ]);
 
-        $jenisSurat->save();
+        $jenisSurat->update($validated);
 
-        return redirect()->route('jenis_surat.index')->with('update', 'Perubahan data berhasil!');
+        return redirect()->route('jenis_surat.index')
+            ->with('success', 'Data Jenis Surat berhasil diperbarui!');
     }
 
 
@@ -83,6 +133,7 @@ class JenissuratController extends Controller
         $jenisSurat = JenisSurat::findOrFail($id);
 
         $jenisSurat->delete();
-        return redirect()->route('jenis_surat.index')->with('succes,', 'data berhasil dihapus');
+        return redirect()->route('jenis_surat.index')
+        ->with('success,', 'data berhasil dihapus');
     }
 }

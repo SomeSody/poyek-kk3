@@ -1,10 +1,8 @@
-
-<!DOCTYPE html>
-<html lang="en">
 <!-- [Head] start -->
 
 <head>
-  <title>Home | Mantis Bootstrap 5 Admin Template</title>
+<title>@yield('title')</title>
+
   <!-- [Meta] -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -13,8 +11,8 @@
   <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
   <meta name="author" content="CodedThemes">
 
-  <!-- [Favicon] icon -->
-  <link rel="icon" href="{{ asset('dist')}}/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
+<!-- [Favicon] icon -->
+<link rel="icon" href="{{ asset('dist')}}/assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
 <!-- [Tabler Icons] https://tablericons.com -->
 <link rel="stylesheet" href="{{ asset('dist')}}/assets/fonts/tabler-icons.min.css" >
@@ -41,13 +39,14 @@
 </div>
 <!-- [ Pre-loader ] End -->
 
- <!-- [ Sidebar Menu ] start -->
+<!-- [ Sidebar Menu ] start -->
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
       <a href="../dashboard/index.html" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ -->
-        <img src="{{ asset('dist')}}/assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo">
+        <img src="{{ asset('dist')}}/assets/images/images.jpg" class="img-fluid logo-lg" alt="logo">
+        <span>Manajemen Surat</span>
       </a>
     </div>
     <div class="navbar-content">

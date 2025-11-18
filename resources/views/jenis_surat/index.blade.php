@@ -1,6 +1,7 @@
 @extends('layouts.admin.mantis')
 @section('content')
-@section('title', 'Pelaggan')
+@section('title', 'Jenis Surat')
+
 <div class="py-4">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -11,21 +12,22 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#">Pelanggan</a></li>
+                    <li class="breadcrumb-item"><a href="#">Surat</a></li>
                 </ol>
             </nav>
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">Data Pelanggan</h1>
-                    <p class="mb-0">List data seluruh pelanggan</p>
+                    <h1 class="h4">Data Surat</h1>
+                    <p class="mb-0">List Seluruh Data Surat</p>
                 </div>
                 <div>
-                    <a href="{{route('jenis_surat.create')}}" class="btn btn-success text-white"><i class="far fa-question-circle me-1"></i> Tambah Pelanggan</a>
+                    <a href="{{route('jenis_surat.create')}}" class="btn btn-success text-white"></i> Tambah Surat</a>
                 </div>
             </div>
         </div>
+
         @if(session("success"))
-            <div class="allert alert-succes">{!!session('success')!!}</div>
+            <div class="alert-succes">{!!session('success')!!}</div>
         @endif
 
         <div class="row">
@@ -37,7 +39,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="border-0">Kode Surat</th>
-                                        <th class="border-0">Nama Jenis Surat</th>
+                                        <th class="border-0">Jenis Surat</th>
                                         <th class="border-0">Syarat Json Surat</th>
                                         <th class="border-0 rounded-end">Action</th>
                                     </tr>
@@ -57,6 +59,7 @@
                                                 </svg>
                                                 Edit
                                             </a>
+
                                             <!-- Tombol Hapus -->
                                                 <form action="{{ route('jenis_surat.destroy', $item->jenis_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                                     @csrf
