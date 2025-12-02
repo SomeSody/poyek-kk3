@@ -58,7 +58,7 @@
           </a>
         </li>
 
-        <li class="pc-item pc-caption">
+        <!-- <li class="pc-item pc-caption">
           <label>UI Components</label>
           <i class="ti ti-dashboard"></i>
         </li>
@@ -142,7 +142,7 @@
             <span class="pc-micon"><i class="ti ti-brand-chrome"></i></span>
             <span class="pc-mtext">Sample page</span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -385,7 +385,7 @@
     <div class="pc-content">
 
       <!-- [ breadcrumb ] start -->
-      <div class="page-header">
+      <!-- <div class="page-header">
         <div class="page-block">
           <div class="row align-items-center">
             <div class="col-md-12">
@@ -400,7 +400,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- [ breadcrumb ] end -->
 
 <!-- [ Main Content ] start -->

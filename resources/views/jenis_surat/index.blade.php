@@ -34,13 +34,38 @@
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow mb-4">
                     <div class="card-body">
+                        <form method="GET" action="{{ route('jenis_surat.index') }}" onchange="this.form.submit()" class="mb-3">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <select name="syarat" class="form-select" onchange="this.form.submit()">
+                                        <option value="">Semua</option>
+                                        <option value="KTP" {{ request('syarat')=='KTP' ? 'selected' : '' }}>KTP</option>
+                                        <option value="KK" {{ request('syarat')=='KK' ? 'selected' : '' }}>KK</option>
+                                        <option value="Pas Foto" {{ request('syarat')=='Pas Foto' ? 'selected' : '' }}>Pas Foto</option>
+                                        <option value="Surat Pengantar RT/RW" {{ request('syarat')=='Surat Pengantar RT/RW' ? 'selected' : '' }}>Surat Pengantar RT/RW</option>
+                                        <option value="Akte Kelahiran" {{ request('syarat')=='Akte Kelahiran' ? 'selected' : '' }}>Akte Kelahiran</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control" id="exampleInputIconRight" value="{{request('search')}}" placeholder="Search" aria-label="Search">
+                                        <button type="submit" class="input-group-text" id="basic-addon2">
+                                        <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                        @if(request('search'))
+							                <a href="{{ request()->fullUrlWithQuery(['search'=> null]) }}" class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
+					                    @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="table-jenis_surat" class="table table-centered table-nowrap mb-0 rounded">
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="border-0">Kode Surat</th>
                                         <th class="border-0">Jenis Surat</th>
-                                        <th class="border-0">Syarat Json Surat</th>
+                                        <th class="border-0">Syarat Surat</th>
                                         <th class="border-0 rounded-end">Action</th>
                                     </tr>
                                 </thead>
@@ -49,8 +74,8 @@
                                         <tr>
                                             <td>{{ $item->kode }}</td>
                                             <td>{{ $item->nama_jenis }}</td>
-                                            <td>{{ $item->syarat_json }}</td>
-
+                                            <td>{{ $item->syarat }}</td>
+                                           
                                             <td>
                                             <!--Tombol Edit-->
                                                 <a href="{{route('jenis_surat.edit', $item->jenis_id)}}" class="btn btn-info btn-sm">
@@ -76,6 +101,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="mt-3">
+                                    {{ $dataJenisSurat->links('pagination::bootstrap-5') }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

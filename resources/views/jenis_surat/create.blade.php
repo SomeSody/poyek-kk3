@@ -31,6 +31,7 @@
     <div class="col-12 mb-4">
         <div class="card border-0 shadow components-section">
             <div class="card-body">
+                
                 <!-- Alert Error Validasi -->
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -55,6 +56,7 @@
                 <form action="{{ route('jenis_surat.store')}}" method="POST">
                     @csrf
                     <div class="row mb-4">
+
                         <!-- Kode Surat -->
                         <div class="mb-3">
                             <label for="kode" class="form-label">Kode Surat <span class="text-danger">*</span></label>
@@ -73,16 +75,27 @@
                             @enderror
                         </div>
 
-                        <!-- Syarat JSON -->
-                        <div class="mb-3">
-                            <label for="syarat_json" class="form-label">Syarat Json <span class="text-danger">*</span></label>
-                            <textarea name="syarat_json" id="syarat_json" class="form-control @error('syarat_json') is-invalid @enderror" rows="4" placeholder='Contoh: ["KTP", "KK", "Foto"]' required>{{ old('syarat_json') }}</textarea>
-                            @error('syarat_json')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <small class="form-text text-muted">Masukkan data dalam format JSON array</small>
-                        </div>
-                    </div>
+                        <!-- Syarat -->
+                            <div class="mb-3">
+                                <label for="syarat" class="form-label">Syarat <span class="text-danger">*</span></label>
+                                <select name="syarat" id="syarat"
+                                    class="form-select @error('syarat') is-invalid @enderror"
+                                    required>
+                                    <option value="" disabled selected>-- Pilih syarat --</option>
+                                    <option value="KTP">KTP</option>
+                                    <option value="KK">KK</option>
+                                    <option value="Surat Pengantar RT/RW">Surat Pengantar RT/RW</option>
+                                    <option value="Akte Kelahiran">Akte Kelahiran</option>
+                                    <option value="Pas Foto">Pas Foto</option>
+                                    <option value="Surat Nikah">Surat Nikah</option>
+                                    <option value="Kartu Pelajar">Kartu Pelajar</option>
+                                    <option value="Surat Pernyataan">Surat Pernyataan</option>
+                                </select>
+
+                                @error('syarat')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                     <!-- Tombol -->
                     <div class="mt-4">
@@ -94,7 +107,6 @@
                         </a>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

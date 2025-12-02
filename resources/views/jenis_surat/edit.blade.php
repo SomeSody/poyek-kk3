@@ -80,14 +80,24 @@
                             @enderror
                         </div>
                     
-                        <!-- Syarat Json -->
+                        <!-- Syarat -->
                         <div class="mb-3">
-                            <label for="syarat_json" class="form-label">Syarat JSON <span class="text-danger">*</span></label>
-                            <textarea id="syarat_json" name="syarat_json" class="form-control @error('syarat_json') is-invalid @enderror" rows="4" placeholder='Contoh: ["KTP", "KK", "Foto"]' required>{{ old('syarat_json', $dataJenisSurat->syarat_json) }}</textarea>
-                            @error('syarat_json')
+                            <label for="syarat" class="form-label">Syarat<span class="text-danger">*</span></label>
+                            <select name="syarat" id="syarat"
+                                class="form-select @error('syarat') is-invalid @enderror"
+                                required>
+                                <option value="KTP" {{ old('syarat', $dataJenisSurat->syarat) == 'KTP' ? 'selected' : '' }}>KTP</option>
+                                <option value="KK" {{ old('syarat', $dataJenisSurat->syarat) == 'KK' ? 'selected' : '' }}>KK</option>
+                                <option value="Surat Pengantar RT/RW" {{ old('syarat', $dataJenisSurat->syarat) == 'Surat Pengantar RT/RW' ? 'selected' : '' }}>Surat Pengantar RT/RW</option>
+                                <option value="Akte Kelahiran" {{ old('syarat', $dataJenisSurat->syarat) == 'Akte Kelahiran' ? 'selected' : '' }}>Akte Kelahiran</option>
+                                <option value="Pas Foto" {{ old('syarat', $dataJenisSurat->syarat) == 'Pas Foto' ? 'selected' : '' }}>Pas Foto</option>
+                                <option value="Surat Nikah" {{ old('syarat', $dataJenisSurat->syarat) == 'Surat Nikah' ? 'selected' : '' }}>Surat Nikah</option>
+                                <option value="Kartu Pelajar" {{ old('syarat', $dataJenisSurat->syarat) == 'Kartu Pelajar' ? 'selected' : '' }}>Kartu Pelajar</option>
+                                <option value="Surat Pernyataan" {{ old('syarat', $dataJenisSurat->syarat) == 'Surat Pernyataan' ? 'selected' : '' }}>Surat Pernyataan</option>
+                            </select>
+                            @error('syarat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <small class="form-text text-muted">Masukkan data dalam format JSON array</small>
                         </div>
 
                         <!-- Buttons -->
