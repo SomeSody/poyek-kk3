@@ -6,9 +6,9 @@ use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\MultipleuploadsController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/ketua', function () {
     return view('ketua');
@@ -18,7 +18,7 @@ Route::get('/anggota', function () {
     return view('wanggota');
 });
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('products', \App\Http\Controllers\ProductController::class);
 

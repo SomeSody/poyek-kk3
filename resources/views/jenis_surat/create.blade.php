@@ -1,4 +1,4 @@
-@extends('layouts.admin.mantis')
+@extends('mantis.mantis')
 @section('content')
 @section('title', 'Tambah Surat')
 
