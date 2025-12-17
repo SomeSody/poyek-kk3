@@ -52,9 +52,41 @@
     <div class="navbar-content">
       <ul class="pc-navbar">
         <li class="pc-item">
-          <a href="../dashboard/index.html" class="pc-link">
+          <a href="{{route('dashboard')}}" class="pc-link">
             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
             <span class="pc-mtext">Dashboard</span>
+          </a>
+        </li>
+
+      <ul class="pc-navbar">
+        <li class="pc-item">
+            <a href="{{route('user.index')}}" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+            <span class="pc-mtext">User</span>
+          </a>
+        </li>
+
+      <ul class="pc-navbar">
+        <li class="pc-item">
+            <a href="{{route('pelanggan.index')}}" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+            <span class="pc-mtext">Pelanggan</span>
+          </a>
+        </li>
+
+      <ul class="pc-navbar">
+        <li class="pc-item">
+            <a href="{{route('jenis_surat.index')}}" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+            <span class="pc-mtext">Jenis Surat</span>
+          </a>
+        </li>
+
+      <ul class="pc-navbar">
+        <li class="pc-item">
+            <a href="{{route('permohonans.index')}}" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+            <span class="pc-mtext">Jenis Surat</span>
           </a>
         </li>
 
@@ -283,7 +315,7 @@
         aria-expanded="false"
       >
         <img src="{{ asset('dist')}}/assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-        <span>Stebin Ben</span>
+        <span>{{Auth::user()->name}}</span>
       </a>
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
         <div class="dropdown-header">
@@ -292,7 +324,7 @@
               <img src="{{ asset('dist')}}/assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
             </div>
             <div class="flex-grow-1 ms-3">
-              <h6 class="mb-1">Stebin Ben</h6>
+              <h6 class="mb-1">{{Auth::user()->name}}</h6>
               <span>UI/UX Designer</span>
             </div>
             <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
@@ -344,11 +376,12 @@
               <i class="ti ti-wallet"></i>
               <span>Billing</span>
             </a>
-            <a href="#!" class="dropdown-item">
+            <a href="{{route('auth.logout')}}" class="dropdown-item">
               <i class="ti ti-power"></i>
               <span>Logout</span>
             </a>
           </div>
+
           <div class="tab-pane fade" id="drp-tab-2" role="tabpanel" aria-labelledby="drp-t2" tabindex="0">
             <a href="#!" class="dropdown-item">
               <i class="ti ti-help"></i>

@@ -1,4 +1,4 @@
-@extends('mantis.mantis')
+@extends('layouts.mantis.mantis')
 @section('title', 'Edit Surat')
 @section('content')
 
@@ -60,7 +60,7 @@
                 <form action="{{ route('jenis_surat.update', $dataJenisSurat->jenis_id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    
+
                     <div class="row mb-4">
                         <!-- Kode Surat -->
                         <div class="mb-3">
@@ -79,7 +79,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                    
+
                         <!-- Syarat -->
                         <div class="mb-3">
                             <label for="syarat" class="form-label">Syarat<span class="text-danger">*</span></label>

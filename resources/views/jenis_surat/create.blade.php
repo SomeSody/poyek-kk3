@@ -1,4 +1,4 @@
-@extends('mantis.mantis')
+@extends('layouts.mantis.mantis')
 @section('content')
 @section('title', 'Tambah Surat')
 
@@ -31,7 +31,7 @@
     <div class="col-12 mb-4">
         <div class="card border-0 shadow components-section">
             <div class="card-body">
-                
+
                 <!-- Alert Error Validasi -->
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">

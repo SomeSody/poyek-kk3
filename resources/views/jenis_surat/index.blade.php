@@ -1,4 +1,4 @@
-@extends('mantis.mantis')
+@extends('layouts.mantis.mantis')
 @section('content')
 @section('title', 'Jenis Surat')
 
@@ -75,7 +75,7 @@
                                             <td>{{ $item->kode }}</td>
                                             <td>{{ $item->nama_jenis }}</td>
                                             <td>{{ $item->syarat }}</td>
-                                           
+
                                             <td>
                                             <!--Tombol Edit-->
                                                 <a href="{{route('jenis_surat.edit', $item->jenis_id)}}" class="btn btn-info btn-sm">
