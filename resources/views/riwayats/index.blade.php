@@ -121,7 +121,7 @@
                 @endforelse
             </div>
 
-            Pagination
+            <!-- Pagination -->
             @if($riwayats->hasPages())
             <div class="mt-5">
                 <!-- Pagination Links -->

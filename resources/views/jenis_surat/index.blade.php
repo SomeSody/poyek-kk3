@@ -87,7 +87,7 @@
                 @endforelse
             </div>
 
-            Pagination
+            <!-- Pagination -->
             @if($jenis_surat->hasPages())
             <div class="mt-5">
                 <!-- Pagination Links -->

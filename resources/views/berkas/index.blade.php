@@ -123,7 +123,7 @@
                 @endforelse
             </div>
 
-            Pagination
+            <!-- Pagination -->
             @if($berkas->hasPages())
             <div class="mt-5">
                 <!-- Pagination Links -->

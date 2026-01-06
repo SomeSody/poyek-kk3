@@ -130,7 +130,7 @@
                 @endforelse
             </div>
 
-            Pagination
+            <!-- Pagination -->
             @if($permohonans->hasPages())
             <div class="mt-5">
                 <!-- Pagination Links -->
