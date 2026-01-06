@@ -1,4 +1,4 @@
-@extends('layouts.mantis.mantis')
+@extends('adminlte::page')
 
 @section('title', 'Create Permohonan')
 

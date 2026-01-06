@@ -11,7 +11,7 @@ class BerkasController extends Controller
     public function index()
     {
         // server-side pagination Laravel
-        $berkas = Berkas::latest()->paginate(10);
+        $berkas = Berkas::latest()->paginate(9);
         return view('berkas.index', compact('berkas'));
     }
 

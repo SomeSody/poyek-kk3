@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Riwayat;
+use App\Models\RiwayatStatusSurat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +11,7 @@ class RiwayatController extends Controller
     public function index()
     {
         // server-side pagination Laravel
-        $riwayats = Riwayat::latest()->paginate(10);
+        $riwayats = RiwayatStatusSurat::latest()->paginate(9);
         return view('riwayats.index', compact('riwayats'));
     }
 
@@ -33,22 +33,22 @@ class RiwayatController extends Controller
 
         
 
-        Riwayat::create($data);
+        RiwayatStatusSurat::create($data);
 
-        return redirect()->route('riwayats.index')->with('success', 'Riwayat created.');
+        return redirect()->route('riwayats.index')->with('success', 'Riwayat1 created.');
     }
 
-    public function show(Riwayat $riwayat)
+    public function show(RiwayatStatusSurat $riwayat)
     {
         return view('riwayats.show', compact('riwayat'));
     }
 
-    public function edit(Riwayat $riwayat)
+    public function edit(RiwayatStatusSurat $riwayat)
     {
         return view('riwayats.edit', compact('riwayat'));
     }
 
-    public function update(Request $request, Riwayat $riwayat)
+    public function update(Request $request, RiwayatStatusSurat $riwayat)
     {
         $data = $request->validate([
             'permohonan_id' => 'required|string|max:255',
@@ -63,12 +63,12 @@ class RiwayatController extends Controller
 
         $riwayat->update($data);
 
-        return redirect()->route('riwayats.index')->with('success', 'Riwayat updated.');
+        return redirect()->route('riwayats.index')->with('success', 'Riwaya1 updated.');
     }
 
-    public function destroy(Riwayat $riwayat)
+    public function destroy(RiwayatStatusSurat $riwayat)
     {
         $riwayat->delete();
-        return redirect()->route('riwayats.index')->with('success', 'Riwayat deleted.');
+        return redirect()->route('riwayats.index')->with('success', 'Riwayat1 deleted.');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\JenisSurat;
 
-class JenissuratController extends Controller
+class JenisSuratController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,8 @@ class JenissuratController extends Controller
         $filterableColumns = ['syarat'];
         $searchableColumns = ['kode', 'nama_jenis', 'syarat'];
         
-        $data['dataJenisSurat'] = JenisSurat::filter($request, $filterableColumns) 
-                ->search($request, $searchableColumns)
-                ->paginate(7)
-                ->withQueryString();
-        return view('jenis_surat.index', $data);
+        $jenis_surat = JenisSurat::paginate(9);    
+        return view('jenis_surat.index', compact('jenis_surat'));
     }
 
 
@@ -62,9 +59,10 @@ class JenissuratController extends Controller
      */
     public function show(string $id)
     {
-        $data['dataJenisSurat'] = JenisSurat::findOrFail($id);
-        return view('jenis_surat.show', $data);
+        $jenis_surat = JenisSurat::findOrFail($id);
+        return view('jenis_surat.show', compact('jenis_surat'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

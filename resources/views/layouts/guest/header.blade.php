@@ -92,19 +92,19 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="{{ route('guest.permohonan.create') }}">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="{{ route('permohonan.create') }}">
                         <img class="img-fluid rounded mb-4" src="{{ asset('assets-guest/img/service-1.jpg') }}" alt="">
                         <h4 class="mb-0">Surat Keterangan Domisili</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="{{ route('guest.permohonan.create') }}">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="{{ route('permohonan.create') }}">
                         <img class="img-fluid rounded mb-4" src="{{ asset('assets-guest/img/service-2.jpg') }}" alt="">
                         <h4 class="mb-0">Surat Keterangan Tidak Mampu</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="{{ route('guest.permohonan.create') }}">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="{{ route('permohonan.create') }}">
                         <img class="img-fluid rounded mb-4" src="{{ asset('assets-guest/img/service-3.jpg') }}" alt="">
                         <h4 class="mb-0">Surat Keterangan Usaha</h4>
                     </a>

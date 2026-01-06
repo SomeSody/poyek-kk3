@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permohonan;
+use App\Models\PermohonanSurat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PermohonanController extends Controller
 {
     public function index()
     {
-        // server-side pagination Laravel
-        $permohonans = Permohonan::latest()->paginate(10);
+        $permohonans = PermohonanSurat::latest()->paginate(9);
         return view('permohonans.index', compact('permohonans'));
     }
 
@@ -29,27 +27,25 @@ class PermohonanController extends Controller
             'tanggal_pengajuan' => 'nullable|date',
             'status' => 'required|string|max:255',
             'catatan' => 'nullable|string',
-            
         ]);
 
-        
+        PermohonanSurat::create($data);
 
-        Permohonan::create($data);
-
-        return redirect()->route('permohonans.index')->with('success', 'Permohonan created.');
+        return redirect()->route('permohonans.index')
+            ->with('success', 'Permohonan created.');
     }
 
-    public function show(Permohonan $permohonan)
+    public function show(PermohonanSurat $permohonan)
     {
         return view('permohonans.show', compact('permohonan'));
     }
 
-    public function edit(Permohonan $permohonan)
+    public function edit(PermohonanSurat $permohonan)
     {
         return view('permohonans.edit', compact('permohonan'));
     }
 
-    public function update(Request $request, Permohonan $permohonan)
+    public function update(Request $request, PermohonanSurat $permohonan)
     {
         $data = $request->validate([
             'nomor_permohonan' => 'required|integer',
@@ -58,19 +54,19 @@ class PermohonanController extends Controller
             'tanggal_pengajuan' => 'nullable|date',
             'status' => 'required|string|max:255',
             'catatan' => 'nullable|string',
-            
         ]);
-
-        
 
         $permohonan->update($data);
 
-        return redirect()->route('permohonans.index')->with('success', 'Permohonan updated.');
+        return redirect()->route('permohonans.index')
+            ->with('success', 'Permohonan updated.');
     }
 
-    public function destroy(Permohonan $permohonan)
+    public function destroy(PermohonanSurat $permohonan)
     {
         $permohonan->delete();
-        return redirect()->route('permohonans.index')->with('success', 'Permohonan deleted.');
+
+        return redirect()->route('permohonans.index')
+            ->with('success', 'Permohonan deleted.');
     }
 }

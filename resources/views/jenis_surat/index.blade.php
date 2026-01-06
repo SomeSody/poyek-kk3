@@ -1,113 +1,109 @@
-@extends('layouts.mantis.mantis')
+@extends('layouts.guest.app')
+@section('title', 'Data Jenis Surat')
+
 @section('content')
-@section('title', 'Jenis Surat')
-
-<div class="py-4">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="#">
-                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="#">Surat</a></li>
-                </ol>
-            </nav>
-            <div class="d-flex justify-content-between w-100 flex-wrap">
-                <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">Data Surat</h1>
-                    <p class="mb-0">List Seluruh Data Surat</p>
-                </div>
-                <div>
-                    <a href="{{route('jenis_surat.create')}}" class="btn btn-success text-white"></i> Tambah Surat</a>
-                </div>
+    <div class="container-xxl py-5" style="min-height: 70vh;">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <h6 class="section-title bg-white text-center text-primary px-3">Data</h6>
+                <h1 class="display-6 mb-4">Jenis Surat</h1>
             </div>
-        </div>
 
-        @if(session("success"))
-            <div class="alert-succes">{!!session('success')!!}</div>
-        @endif
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa fa-check-circle me-2"></i>{{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
 
-        <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card border-0 shadow mb-4">
-                    <div class="card-body">
-                        <form method="GET" action="{{ route('jenis_surat.index') }}" onchange="this.form.submit()" class="mb-3">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <select name="syarat" class="form-select" onchange="this.form.submit()">
-                                        <option value="">Semua</option>
-                                        <option value="KTP" {{ request('syarat')=='KTP' ? 'selected' : '' }}>KTP</option>
-                                        <option value="KK" {{ request('syarat')=='KK' ? 'selected' : '' }}>KK</option>
-                                        <option value="Pas Foto" {{ request('syarat')=='Pas Foto' ? 'selected' : '' }}>Pas Foto</option>
-                                        <option value="Surat Pengantar RT/RW" {{ request('syarat')=='Surat Pengantar RT/RW' ? 'selected' : '' }}>Surat Pengantar RT/RW</option>
-                                        <option value="Akte Kelahiran" {{ request('syarat')=='Akte Kelahiran' ? 'selected' : '' }}>Akte Kelahiran</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control" id="exampleInputIconRight" value="{{request('search')}}" placeholder="Search" aria-label="Search">
-                                        <button type="submit" class="input-group-text" id="basic-addon2">
-                                        <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                                        </button>
-                                        @if(request('search'))
-							                <a href="{{ request()->fullUrlWithQuery(['search'=> null]) }}" class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
-					                    @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="table-responsive">
-                            <table id="table-jenis_surat" class="table table-centered table-nowrap mb-0 rounded">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="border-0">Kode Surat</th>
-                                        <th class="border-0">Jenis Surat</th>
-                                        <th class="border-0">Syarat Surat</th>
-                                        <th class="border-0 rounded-end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($dataJenisSurat as $item)
-                                        <tr>
-                                            <td>{{ $item->kode }}</td>
-                                            <td>{{ $item->nama_jenis }}</td>
-                                            <td>{{ $item->syarat }}</td>
-
-                                            <td>
-                                            <!--Tombol Edit-->
-                                                <a href="{{route('jenis_surat.edit', $item->jenis_id)}}" class="btn btn-info btn-sm">
-                                                <svg  class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"></path>
-                                                </svg>
-                                                Edit
-                                            </a>
-
-                                            <!-- Tombol Hapus -->
-                                                <form action="{{ route('jenis_surat.destroy', $item->jenis_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                        </svg>
-                                                        Hapus
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="mt-3">
-                                    {{ $dataJenisSurat->links('pagination::bootstrap-5') }}
-                                </div>
-                            </div>
-                        </div>
+            <!-- Filter/Search -->
+            <div class="row mb-4">
+                <div class="col-lg-6 mx-auto">
+                    <div class="input-group">
+                        <input type="text" id="searchBox" class="form-control" placeholder="Cari jenis surat...">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </div>
+
+            <!-- Cards Grid -->
+            <div class="row g-4" id="jenisSuratContainer">
+                @forelse($jenis_surat as $item)
+                    <div class="col-lg-4 col-md-6 wow fadeInUp jenis-surat-item" data-wow-delay="0.1s">
+                        <div class="card h-100 shadow-sm border-0 rounded-3 hover-lift">
+                            <!-- Card Header -->
+                            <div class="card-header bg-primary text-white py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">
+                                        <i class="fa fa-file-alt me-2"></i>Kode: {{ $item->kode }}
+                                    </h5>
+                                    <span class="badge bg-light text-primary">
+                                        <i class="fa fa-bookmark me-1"></i>Surat
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body p-4">
+                                <!-- Nama Jenis Surat -->
+                                <div class="mb-3 pb-3 border-bottom">
+                                    <small class="text-muted d-block mb-2">
+                                        <i class="fa fa-file-alt me-1"></i>Nama Jenis Surat
+                                    </small>
+                                    <h5 class="mb-0">{{ $item->nama_jenis }}</h5>
+                                </div>
+
+                                <!-- Syarat -->
+                                <div class="mb-3">
+                                    <small class="text-muted d-block mb-2">
+                                        <i class="fa fa-list me-1"></i>Persyaratan
+                                    </small>
+                                    <div class="bg-light p-3 rounded" style="max-height: 150px; overflow-y: auto;">
+                                        <small>{!! nl2br(e(Str::limit($item->syarat, 150))) !!}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Footer -->
+                            <div class="card-footer bg-light border-0 py-3">
+                                <a href="{{ route('jenis_surat.show', $item) }}" class="btn btn-primary w-100">
+                                    <i class="fa fa-eye me-2"></i>Lihat Detail
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <div class="text-center py-5">
+                            <div class="mb-4">
+                                <i class="fa fa-inbox fa-5x text-muted"></i>
+                            </div>
+                            <h4 class="text-muted">Belum Ada Data Jenis Surat</h4>
+                            <p class="text-muted">Saat ini belum ada jenis surat yang tersedia.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+
+            Pagination
+            @if($jenis_surat->hasPages())
+            <div class="mt-5">
+                <!-- Pagination Links -->
+                <div class="d-flex justify-content-center mb-3">
+                    <nav aria-label="Page navigation">
+                        {{ $jenis_surat->links('pagination::bootstrap-4') }}
+                    </nav>
+                </div>
+                <div class="text-center">
+                    <small class="text-muted">
+                        Menampilkan {{ $jenis_surat->firstItem() }} sampai {{ $jenis_surat->lastItem() }} dari {{ $jenis_surat->total() }} hasil
+                    </small>
+                </div>
+            </div>
+            @endif
+        <script src="{{ asset('assets-guest/js/main.js') }}"></script>
         </div>
-@endsection
+    </div>
+@stop
